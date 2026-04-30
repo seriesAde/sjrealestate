@@ -26,7 +26,10 @@ export default function Loginform() {
             localStorage.setItem("authData", JSON.stringify(dataToStore));
             // Route to dashboard on successful login
             alert("Login successful! Welcome back.");
-            // router.push('/dashboard');
+
+            setTimeout(() => {
+                router.push("/dashboard")
+            }, 1000)
         } catch (error) {
             console.error(error);
         }
