@@ -6,7 +6,8 @@ import { loginSchema } from "@/lib/loginSchema";
 import { useRouter } from "next/navigation";
 
 export default function Loginform() {
-    const baseURL = "http://property.reworkstaging.name.ng/v1";
+    // const baseURL = "http://property.reworkstaging.name.ng/v1";
+    const baseURL = "/api";
     const router = useRouter();
     const {
         register,

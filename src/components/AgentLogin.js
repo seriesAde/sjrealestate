@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function Loginform() {
-    const baseURL = "http://property.reworkstaging.name.ng/v1";
+    // const baseURL = "http://property.reworkstaging.name.ng/v1";
+    const baseURL = "/api";
     const router = useRouter();
 
     const {
