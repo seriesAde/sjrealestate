@@ -22,14 +22,15 @@ export default function Loginform() {
 
         try {
             const res = await axios.post(`${baseURL}/auth/login`, data);
-            console.log(res.data);
-            const dataToStore = res.data.data.token;
-            localStorage.setItem("authData", JSON.stringify(dataToStore));
+            const dataToStore = { token: res.data.data.token, role: res.data.data.role };
+            console.log(dataToStore);
+
             // Route to dashboard on successful login
-            alert("Login successful! Welcome back.");
+            alert(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? "Agent" : dataToStore.role == "MERCHANT" ? "Merchant" : "Unknown role"}`);
 
             setTimeout(() => {
-                router.push("/dashboard")
+                localStorage.setItem("authData", JSON.stringify(dataToStore));
+                dataToStore?.role === "AGENT" ? router.push('/agent-dashboard') : dataToStore?.role === "MERCHANT" ? router.push('/merchant/dashboard') : router.push('/user/login');
             }, 1000)
         } catch (error) {
             console.error(error);

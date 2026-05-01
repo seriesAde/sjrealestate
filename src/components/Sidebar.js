@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AGENT_MENU_ITEMS } from "@/lib/agentDashboardNav"; 
+import { AGENT_MENU_ITEMS } from "@/lib/agentDashboardNav";
 import { LogOut } from "lucide-react";
 
 export default function Sidebar() {
@@ -21,8 +21,8 @@ export default function Sidebar() {
                             key={item.name}
                             href={item.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive
-                                    ? "bg-blue-50 text-blue-600"
-                                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                                ? "bg-blue-50 text-blue-600"
+                                : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                                 }`}
                         >
                             {item.icon}
