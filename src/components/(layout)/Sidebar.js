@@ -10,7 +10,7 @@ export default function Sidebar() {
     return (
         <aside className="w-64 h-screen bg-white border-r border-slate-200 flex flex-col sticky top-0">
             <div className="p-6 border-b border-slate-100">
-                <h1 className="text-xl font-bold text-blue-600">PropAgent</h1>
+                <h1 className="text-xl font-bold text-primary">PropAgent</h1>
             </div>
 
             <nav className="flex-1 p-4 space-y-1">
@@ -21,7 +21,7 @@ export default function Sidebar() {
                             key={item.name}
                             href={item.path}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive
-                                ? "bg-blue-50 text-blue-600"
+                                ? "bg-blue-50 text-primary"
                                 : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                                 }`}
                         >

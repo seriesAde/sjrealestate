@@ -1,4 +1,5 @@
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/(layout)/Sidebar";
+import { AgentProvider } from "@/context/AgentContext";
 
 export default function AgentLayout({ children }) {
     return (
@@ -6,7 +7,9 @@ export default function AgentLayout({ children }) {
             <Sidebar />
 
             <main className="flex-1 p-8">
-                {children}
+                <AgentProvider>
+                    {children}
+                </AgentProvider>
             </main>
         </div>
     );

@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
+// import { useContext } from "react";
 
 export default function Dashboard() {
+    const { authData } = useAuth();
+    // console.log("Auth Data in Dashboard:", authData);
+
 
 
     return (

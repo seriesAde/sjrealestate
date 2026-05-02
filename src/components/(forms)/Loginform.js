@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/loginSchema";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Loginform() {
     // const baseURL = "http://property.reworkstaging.name.ng/v1";
@@ -22,15 +23,15 @@ export default function Loginform() {
 
         try {
             const res = await axios.post(`${baseURL}/auth/login`, data);
-            const dataToStore = { token: res.data.data.token, role: res.data.data.role };
+            const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name };
             console.log(dataToStore);
 
             // Route to dashboard on successful login
-            alert(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? "Agent" : dataToStore.role == "MERCHANT" ? "Merchant" : "Unknown role"}`);
+            toast.success(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? `${dataToStore.name}` : dataToStore.role == "MERCHANT" ? `${dataToStore.name}` : null}`);
 
             setTimeout(() => {
                 localStorage.setItem("authData", JSON.stringify(dataToStore));
-                dataToStore?.role === "AGENT" ? router.push('/agent-dashboard') : dataToStore?.role === "MERCHANT" ? router.push('/merchant/dashboard') : router.push('/user/login');
+                dataToStore?.role === "AGENT" ? router.push('/agent/agent-dashboard') : dataToStore?.role === "MERCHANT" ? router.push('/merchant/dashboard') : router.push('/user/login');
             }, 1000)
         } catch (error) {
             console.error(error);

@@ -1,8 +1,7 @@
-import LoginForm from "@/components/Registerform";
-import RegisterForm from "@/components/Registerform";
+import LoginForm from "@/components/(forms)/Loginform";
 import { FaPersonRifle, FaUser } from "react-icons/fa6";
 
-export default function Register() {
+export default function Login() {
     return (
         <div>
             <div className="flex items-center justify-center h-screen">
@@ -10,10 +9,9 @@ export default function Register() {
                     <div className="w-10 h-10 rounded-full border-2 flex items-center justify-center text-primary bg-secondary">
                         <FaUser />
                     </div>
-                    <h1 className="text-2xl font-bold tracking-widest text-secondary ">Welcome</h1>
+                    <h1 className="text-2xl font-bold tracking-widest text-secondary ">Welcome Back</h1>
 
-
-                    <RegisterForm />
+                    <LoginForm />
                 </div>
             </div>
         </div >

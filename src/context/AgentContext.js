@@ -4,9 +4,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const AuthContext = createContext();
+const AgentContext = createContext();
 
-export function AuthProvider({ children }) {
+export function AgentProvider({ children }) {
     const router = useRouter();
     const [authData, setAuthData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,13 +16,13 @@ export function AuthProvider({ children }) {
         const storedAuth = JSON.parse(localStorage.getItem("authData"));
         setAuthData(storedAuth);
         // console.log("Stored Auth Data from localStorage:", storedAuth);
-        if (!storedAuth || storedAuth.role !== "MERCHANT") {
+        if (!storedAuth || storedAuth.role !== "AGENT") {
             setAuthorized(false);
             router.push("/login");
             localStorage.removeItem("authData");
-            toast.error("Unauthorized access. Please log in as a merchant to view the dashboard.");
+            toast.error("Unauthorized access. Please log in as an agent to access agent dashboard.");
             return;
-        } else if (storedAuth.role === "MERCHANT") {
+        } else if (storedAuth.role === "AGENT") {
             setAuthorized(true);
         }
         //  else if (storedAuth.role === "AGENT") {
@@ -35,12 +35,12 @@ export function AuthProvider({ children }) {
 
 
     return (
-        <AuthContext.Provider value={{ authData, loading, setLoading, authorized, setAuthorized }}>
+        <AgentContext.Provider value={{ authData, loading, setLoading, authorized, setAuthorized }}>
             {children}
-        </AuthContext.Provider>
+        </AgentContext.Provider>
     );
 }
 
-export function useAuth() {
-    return useContext(AuthContext);
+export function useAgent() {
+    return useContext(AgentContext);
 }

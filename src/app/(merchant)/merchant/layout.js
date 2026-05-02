@@ -1,6 +1,7 @@
-import Sidebar from "@/components/Sidebar";
-import MerchantSideNav from "@/components/merchantSideNav";
+import Sidebar from "@/components/(layout)/Sidebar";
+import MerchantSideNav from "@/components/(layout)/merchantSideNav";
 import { AuthProvider } from "@/context/AuthContext";
+import MerchantTopNav from "@/components/(layout)/merchantTopNav";
 
 
 export default function MerchantLayout({ children }) {
@@ -10,6 +11,7 @@ export default function MerchantLayout({ children }) {
             <MerchantSideNav />
             <main className="p-8 min-h-screen overflow-y-auto w-full">
                 <AuthProvider>
+                    <MerchantTopNav />
                     {children}
                 </AuthProvider>
             </main>

@@ -19,7 +19,7 @@ export default function MerchantSideNav() {
         <div className=" ">
             {/* Mobile Top Navbar */}
             <div className="lg:hidden flex items-center justify-between p-4 border-b border-slate-200 bg-white sticky top-0 z-50">
-                <h1 className="text-lg font-bold text-blue-600">Merchant</h1>
+                <h1 className="text-lg font-bold text-primary">Merchant</h1>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="p-2 rounded-md hover:bg-slate-100"
@@ -49,7 +49,7 @@ export default function MerchantSideNav() {
             >
                 {/* Header */}
                 <div className="p-6 border-b border-slate-100 hidden lg:block">
-                    <h1 className="text-xl font-bold text-blue-600 text-center">
+                    <h1 className="text-xl font-bold text-primary text-center">
                         Merchant
                     </h1>
                 </div>
@@ -65,7 +65,7 @@ export default function MerchantSideNav() {
                                 href={item.path}
                                 onClick={() => setIsOpen(false)}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${isActive
-                                    ? "bg-blue-50 text-blue-600"
+                                    ? "bg-blue-50 text-primary"
                                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                                     }`}
                             >
