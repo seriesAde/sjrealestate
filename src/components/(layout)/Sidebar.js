@@ -6,6 +6,10 @@ import { LogOut } from "lucide-react";
 
 export default function Sidebar() {
     const pathname = usePathname();
+    function handleLogout() {
+        localStorage.clear();
+        window.location.href = "/login";
+    }
 
     return (
         <aside className="w-64 h-screen bg-white border-r border-slate-200 flex flex-col sticky top-0">
@@ -33,7 +37,7 @@ export default function Sidebar() {
             </nav>
 
             <div className="p-4 border-t border-slate-100">
-                <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg">
+                <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg">
                     <LogOut size={20} />
                     Logout
                 </button>
