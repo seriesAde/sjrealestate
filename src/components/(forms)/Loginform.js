@@ -48,7 +48,7 @@ export default function Loginform() {
                     type="email"
                     placeholder="Email"
                     {...register("email")}
-                    className="w-full border p-2 rounded"
+                    className="w-full border-2 p-2 rounded outline-none border-secondary text-secondary"
                     name="email"
                 />
                 {errors.email && (
@@ -62,7 +62,7 @@ export default function Loginform() {
                     type="password"
                     placeholder="Password"
                     {...register("password")}
-                    className="w-full border p-2 rounded"
+                    className="w-full border-2 text-secondary p-2 rounded outline-none border-secondary"
                     name="password"
                 />
                 {errors.password && (
@@ -75,7 +75,7 @@ export default function Loginform() {
                 <button
                     type="submit"
                     disabled={isSubmitting && true}
-                    className={`bg-primary cursor-pointer text-black px-4 py-2 rounded ${isSubmitting ? 'bg-secondary' : ''}`}
+                    className={`bg-secondary cursor-pointer text-white font-bold px-4 py-2 rounded ${isSubmitting ? 'bg-secondary/20' : ''}`}
                 >
                     {isSubmitting ? "please wait..." : "Login"}
                 </button>
