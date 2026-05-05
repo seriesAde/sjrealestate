@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
+import { User } from "lucide-react";
+
 
 export default function MerchantTopNav() {
 
@@ -14,7 +16,7 @@ export default function MerchantTopNav() {
                 <div className=" capitalize text-lg font-bold text-secondary flex gap-4 items-center">
                     welcome {authData?.name}
                     <div className="flex items-center">
-                        <Image src='' alt='Profile' width={50} height={50} />
+                        <Image src={User} alt='Profile' width={50} height={50} />
                     </div>
                 </div>
             </div>

@@ -35,7 +35,7 @@ export default function Agents() {
                         <tr className="">
                             <th className="w-1/4">Name</th>
                             <th className="w-1/4">Company</th>
-                            <th className="w-1/4">Date</th>
+                            <th className="w-1/4">Status</th>
                             <th className="w-1/4">Actions</th>
                         </tr>
                     </thead>
@@ -43,10 +43,13 @@ export default function Agents() {
                         <tr className="  ">
                             <td className="py-3">123 Main St</td>
                             <td className="py-3">John Doe</td>
-                            <td className="py-3">2023-10-15</td>
+                            <td className="py-3">Verified</td>
                             <td className="py-3 flex gap-5 w-full items-center text-justify">
                                 <button className="cursor-pointer text-primary hover:text-secondary bg-primary/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
                                     Edit
+                                </button>
+                                <button className="cursor-pointer text-blue-500 hover:text-blue-700 bg-blue-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
+                                    Verify
                                 </button>
                                 <button className="cursor-pointer text-red-500 hover:text-red-700 bg-red-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
                                     Delete
@@ -56,10 +59,13 @@ export default function Agents() {
                         <tr>
                             <td className="py-3">456 Oak Ave</td>
                             <td className="py-3">Jane Smith</td>
-                            <td className="py-3">2023-10-16</td>
+                            <td className="py-3">Pending</td>
                             <td className="py-3 flex gap-5 w-full items-center text-justify">
                                 <button className="cursor-pointer text-primary hover:text-secondary bg-primary/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
                                     Edit
+                                </button>
+                                <button className="cursor-pointer text-blue-500 hover:text-blue-700 bg-blue-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
+                                    Verify
                                 </button>
                                 <button className="cursor-pointer text-red-500 hover:text-red-700 bg-red-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
                                     Delete

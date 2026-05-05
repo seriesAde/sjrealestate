@@ -23,8 +23,9 @@ export default function Loginform() {
 
         try {
             const res = await axios.post(`${baseURL}/auth/login`, data);
-            const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name };
+            const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name, id: res.data.data.id };
             console.log(dataToStore);
+            console.log(res.data);
 
             // Route to dashboard on successful login
             toast.success(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? `${dataToStore.name}` : dataToStore.role == "MERCHANT" ? `${dataToStore.name}` : null}`);
