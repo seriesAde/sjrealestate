@@ -12,7 +12,7 @@ export default function AgentAppointmentManager() {
 
     useEffect(() => {
         fetchAppointments();
-    }, []);
+    }, []); // Refetch when appointments change (e.g., after confirming/completing)
 
     const fetchAppointments = async () => {
         try {
@@ -23,7 +23,8 @@ export default function AgentAppointmentManager() {
             const res = await axios.get(`${baseURL}/appointments?agent=${agentId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setAppointments(res.data);
+            console.log("Fetched Appointments:", res.data.data);
+            setAppointments(res.data.data || []);
         } catch (error) {
             toast.error("Failed to load appointments");
         } finally {

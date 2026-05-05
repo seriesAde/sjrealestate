@@ -11,7 +11,7 @@ export default function MerchantSideNav() {
     const [isOpen, setIsOpen] = useState(false);
 
     function handleLogout() {
-        localStorage.clear();
+        localStorage.removeItem("authData");
         window.location.href = "/login";
     }
 

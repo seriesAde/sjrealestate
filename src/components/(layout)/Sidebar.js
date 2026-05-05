@@ -7,7 +7,7 @@ import { LogOut } from "lucide-react";
 export default function Sidebar() {
     const pathname = usePathname();
     function handleLogout() {
-        localStorage.clear();
+        localStorage.removeItem("agent_info");
         window.location.href = "/login";
     }
 

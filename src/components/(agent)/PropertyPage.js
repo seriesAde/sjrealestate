@@ -1,5 +1,5 @@
 "use client"
-import {Home,Plus} from "lucide-react";
+import { Home, Plus } from "lucide-react";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
 import axios from "axios";
@@ -74,7 +74,7 @@ export default function PropertyPage({ properties, setProperties }) {
                         <PropertyCard
                             key={item.id}
                             item={item}
-                            onDelete={handleDelete}/>
+                            onDelete={handleDelete} />
                     ))}
                 </div>
             )}

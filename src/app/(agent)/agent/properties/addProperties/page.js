@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import {
-    Home,  Tag, Layout,  Bed,
+    Home, Tag, Layout, Bed,
     Bath, User, Car, PlusCircle, Loader2,
     FileText, CheckCircle2, ShieldCheck,
-     ImageIcon, Layers, X
+    ImageIcon, Layers, X
 } from "lucide-react";
 
 export default function CreateProperties() {
@@ -46,7 +46,7 @@ export default function CreateProperties() {
         furnishing: "FURNISHED",
         disclaimer: "",
         amenities: [],
-        agent: agentData?.user.full_name
+        agent: agentData?.name
     });
 
     useEffect(() => {
@@ -102,9 +102,9 @@ export default function CreateProperties() {
 
         try {
             await axios.put(`${baseURL}/properties/${propertyId}/resource`, formDataUpload, {
-                headers: { 
+                headers: {
                     Authorization: `Bearer ${agentData?.token}`,
-                    "Content-Type": "multipart/form-data" 
+                    "Content-Type": "multipart/form-data"
                 }
             });
         } catch (error) {
@@ -271,7 +271,7 @@ export default function CreateProperties() {
                                     onClick={() => handleAmenityChange(amenity)} className={`p-3 text-[10px] font-black rounded-md border-2 transition-all flex items-center justify-between tracking-widest ${formData.amenities.includes(amenity)
                                         ? 'bg-green-50 border-[#00492c] text-[#00492c]'
                                         : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
-                                    }`}
+                                        }`}
                                 >
                                     {amenity}
                                     {formData.amenities.includes(amenity) && <ShieldCheck className="w-3 h-3" />}
@@ -286,7 +286,7 @@ export default function CreateProperties() {
                             <Layers className="w-5 h-5 text-[#00492c]" />
                             <h3 className="font-bold text-slate-800 uppercase text-sm tracking-widest">Property Gallery</h3>
                         </div>
-                        
+
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                             {selectedFiles.map((file, index) => (
                                 <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-slate-200">

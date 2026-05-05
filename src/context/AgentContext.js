@@ -13,7 +13,7 @@ export function AgentProvider({ children }) {
     const [authorized, setAuthorized] = useState(false);
 
     useEffect(() => {
-        const storedAuth = JSON.parse(localStorage.getItem("authData"));
+        const storedAuth = JSON.parse(localStorage.getItem("agent_info"));
         setAuthData(storedAuth);
 
         if (!storedAuth || storedAuth.role !== "AGENT") {
@@ -24,12 +24,12 @@ export function AgentProvider({ children }) {
             router.push("/login");
             return;
         } else if (storedAuth.role === "AGENT") {
-            
+
             setAuthorized(true);
         }
 
         setLoading(false);
-    }, [router]); 
+    }, [router]);
 
     return (
         <AgentContext.Provider value={{ authData, loading, setLoading, authorized, setAuthorized }}>
