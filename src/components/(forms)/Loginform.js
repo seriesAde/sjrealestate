@@ -25,6 +25,7 @@ export default function Loginform() {
             const res = await axios.post(`${baseURL}/auth/login`, data);
             const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name, id: res.data.data.id, email: res.data.data.email || null, company: res.data.data.company || null };
             console.log(dataToStore);
+            console.log(res.data);
 
 
             // Route to dashboard on successful login
