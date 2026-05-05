@@ -213,10 +213,7 @@ PROPERTIES
        "user_id": "345"
     }
 
-
-    DELETE /properties/:property_id [TOKEN REQUIRED]
-    DESCP For deleting a property information
-
+ 
 
 APPOINTMENT
 

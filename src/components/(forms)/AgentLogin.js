@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { agentLoginSchema } from "@/lib/agentLoginSchema";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function Loginform() {
     // const baseURL = "http://property.reworkstaging.name.ng/v1";
@@ -42,13 +43,13 @@ export default function Loginform() {
                 };
 
                 //Save to localStorage
-                localStorage.setItem("authData", JSON.stringify(authData));
+                localStorage.setItem("agent_info", JSON.stringify(authData));
 
                 localStorage.setItem("token", token);//Save token too
-                toast.success("Login Successful!")
+                toast.success(`Welcome back, ${userData.role.toLowerCase()} ${userData.full_name || userData.first_name}`)
 
                 setTimeout(() => {
-                    router.push("/dashboard")
+                    router.push("/agent/agent-dashboard")
                 }, 1500)
 
             } else {
@@ -62,25 +63,50 @@ export default function Loginform() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
-            <div>
-                <input type="email" placeholder="Email" {...register("email")} className={`w-full border p-2 rounded outline-none focus:border-black ${errors.email ? 'border-red-500' : 'border-gray-300'}`} />
-                {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                )}
-            </div>
+        <div className="max-w-md mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-50">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                <div className="group space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-[#00492c] transition-colors">
+                        Email Address
+                    </label>
+                    <input
+                        type="email"
+                        placeholder="agent@gmail.com"
+                        {...register("email")}
+                        className={`w-full bg-slate-50 border-b-2 p-3 text-sm text-black outline-none transition-all duration-300
+                    ${errors.email
+                                ? 'border-red-500 bg-red-50/50'
+                                : 'border-slate-100 focus:border-[#00492c] focus:bg-white focus:shadow-sm'}`}
+                    />
+                    {errors.email && (
+                        <p className="text-red-500 text-[10px] font-bold uppercase tracking-tight mt-1 ml-1">{errors.email.message} </p>
+                    )}
+                </div>
 
-            <div>
-                <input type="password" placeholder="Password" {...register("password")} className={`w-full border p-2 rounded outline-none focus:border-black ${errors.password ? 'border-red-500' : 'border-gray-300'}`} />
-                {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-                )}
-            </div>
+                <div className="group space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 group-focus-within:text-[#00492c] transition-colors">
+                        Password
+                    </label>
+                    <input type="password" placeholder="••••••••" {...register("password")}
+                        className={`w-full bg-slate-50 border-b-2 p-3 text-sm text-black outline-none transition-all duration-300
+                    ${errors.password
+                                ? 'border-red-500 bg-red-50/50'
+                                : 'border-slate-100 focus:border-[#00492c] focus:bg-white focus:shadow-sm'}`}/>
+                    {errors.password && (
+                        <p className="text-red-500 text-[10px] font-bold uppercase tracking-tight mt-1 ml-1"> {errors.password.message}</p>
+                    )}
+                </div>
 
-            <button
-                type="submit" disabled={isSubmitting} className="w-full bg-black text-white py-3 rounded font-bold hover:opacity-90 disabled:bg-gray-400 transition-all cursor-pointer">
-                {isSubmitting ? "Authenticating..." : "Login"}
-            </button>
-        </form>
+                <button type="submit" disabled={isSubmitting}
+                    className="group relative w-full bg-[#00492c] text-white py-4 rounded-xl cursor-pointer uppercase text-[10px] tracking-[0.2em] 
+                       hover:bg-[#003620] hover:shadow-2xl hover:shadow-green-900/30 active:scale-[0.98] 
+                       disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed transition-all duration-500 overflow-hidden">
+                    <span className="relative z-10">
+                        {isSubmitting ? "Authenticating..." : "Sign In to Dashboard"}
+                    </span>
+                </button>
+                <Link href="agent-reg" className="text-black text-sm  flex justify-center gap-2">Don't have an account? <p className="hover:underline "> Register</p></Link>
+            </form>
+        </div>
     );
 }

@@ -15,24 +15,21 @@ export function AgentProvider({ children }) {
     useEffect(() => {
         const storedAuth = JSON.parse(localStorage.getItem("authData"));
         setAuthData(storedAuth);
-        // console.log("Stored Auth Data from localStorage:", storedAuth);
+
         if (!storedAuth || storedAuth.role !== "AGENT") {
             setAuthorized(false);
-            router.push("/login");
+            toast.error("Unauthorized access. Please log in as an agent.");
+
             localStorage.removeItem("authData");
-            toast.error("Unauthorized access. Please log in as an agent to access agent dashboard.");
+            router.push("/login");
             return;
         } else if (storedAuth.role === "AGENT") {
+            
             setAuthorized(true);
         }
-        //  else if (storedAuth.role === "AGENT") {
-        //     router.push("/agent-dashboard");
-        // }
 
         setLoading(false);
-    }, []);
-
-
+    }, [router]); 
 
     return (
         <AgentContext.Provider value={{ authData, loading, setLoading, authorized, setAuthorized }}>

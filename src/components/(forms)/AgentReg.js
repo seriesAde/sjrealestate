@@ -6,9 +6,10 @@ import { agentRegSchema } from "@/lib/agentRegSchema";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function AgentReg() {
-    const baseURL = "http://property.reworkstaging.name.ng/v1";
+    const baseURL = "/api";
     const router = useRouter();
     const [token, setToken] = useState(null);
 
@@ -39,7 +40,7 @@ export default function AgentReg() {
         }
 
         try {
-            // ✅ Fix: Axios post structure is (url, data, config)
+            //Api 
             const response = await axios.post(`${baseURL}/merchants/agents`, data, {
                 headers: {
                     "Content-Type": "application/json",
@@ -73,42 +74,42 @@ export default function AgentReg() {
         <div className="max-w-md mx-auto p-4">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                    <label className="text-sm font-medium">Full Name</label>
+                    <label className="text-sm font-medium text-black">Full Name</label>
                     <input {...register("full_name")} className="w-full border p-2 rounded outline-none focus:border-black" />
                     {errors.full_name && <p className="text-red-500 text-xs mt-1">{errors.full_name.message}</p>}
                 </div>
 
                 <div>
-                    <label className="text-sm font-medium">Company Name</label>
-                    <input {...register("company")} className="w-full border p-2 rounded outline-none focus:border-black" />
+                    <label className="text-sm font-medium text-black">Company Name</label>
+                    <input {...register("company")} className="w-full border p-2 rounded outline-none focus:border-black " />
                     {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company.message}</p>}
                 </div>
 
                 <div>
-                    <label className="text-sm font-medium">Email Address</label>
+                    <label className="text-sm font-medium text-black">Email Address</label>
                     <input type="email" {...register("email")} className="w-full border p-2 rounded outline-none focus:border-black" />
                     {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                 </div>
 
                 <div>
-                    <label className="text-sm font-medium">Phone Number</label>
+                    <label className="text-sm font-medium text-black">Phone Number</label>
                     <input type="text" {...register("phone")} className="w-full border p-2 rounded outline-none focus:border-black" />
                     {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
                 </div>
 
                 <div>
-                    <label className="text-sm font-medium">Password</label>
-                    <input type="password" {...register("password")} className="w-full border p-2 rounded outline-none focus:border-black" />
+                    <label className="text-sm font-medium text-black ">Password</label>
+                    <input type="password" {...register("password")} className="w-full border p-2  rounded outline-none focus:border-black" />
                     {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                 </div>
 
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-black text-white py-3 rounded font-bold hover:bg-gray-800 disabled:bg-gray-400 transition-all"
-                >
+                    className="w-full text-[11px] bg-[#00492c] text-white py-3 rounded font-bold cursor-pointer disabled:bg-gray-400 transition-all">
                     {isSubmitting ? "Processing..." : "Register as Agent"}
                 </button>
+                <Link href="agent-login" className="text-black text-sm  flex justify-center gap-2">Have an account? <p className="hover:underline "> Login</p></Link>
             </form>
         </div>
     );
