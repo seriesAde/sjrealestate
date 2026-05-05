@@ -14,7 +14,6 @@ export const MERCHANT_MENU_ITEMS = [
   { name: "Dashboard", icon: <LayoutDashboard size={20} />, path: "/merchant/dashboard" },
   { name: "My Properties", icon: <Home size={20} />, path: "/merchant/properties" },
   { name: "My Agents", icon: <MdRealEstateAgent size={20} />, path: "/merchant/agents" },
-  { name: "Clients", icon: <Users size={20} />, path: "/merchant/clients" },
   { name: "Appointments", icon: <GrSchedule size={20} />, path: "/merchant/appointments" },
   { name: "Wishlist", icon: <FaClover size={20} />, path: "/merchant/wishlist" },
   { name: "Settings", icon: <Settings size={20} />, path: "/merchant/settings" },

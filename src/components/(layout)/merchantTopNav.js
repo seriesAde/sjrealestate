@@ -7,7 +7,7 @@ export default function MerchantTopNav() {
     const { authData } = useAuth();
     return (
         <div>
-            <div className="flex  justify-between w-full h-30 items-center border-b border-gray-300 pb-5">
+            <div className="flex px-5  justify-between w-full h-30 items-center border-b border-gray-300 pb-5">
                 <div className="">
                     <Image src='/Logo_white.png' alt='Logo' width={500} height={500} className="object-contain size-30" />
                 </div>
