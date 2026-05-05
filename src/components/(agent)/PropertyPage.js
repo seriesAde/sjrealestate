@@ -5,8 +5,9 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function PropertyPage({ properties, setProperties }) {
+export default function PropertyPage({ properties, setProperties, displayName }) {
     const baseURL = "/api";
+
 
     const handleDelete = async (propertyId) => {
         if (!propertyId) {
@@ -39,15 +40,24 @@ export default function PropertyPage({ properties, setProperties }) {
     };
 
     // Get agent name for the header safely
-    const agentName = JSON.parse(localStorage.getItem("agent_info"))?.user?.full_name || "Agent";
+    const agentName = JSON.parse(localStorage.getItem("agent_info"))?.name || "Agent";
 
     return (
         <div className="max-w-7xl mx-auto p-6 md:p-10 min-h-screen bg-white">
             <div className="mb-12 flex justify-between border-b border-slate-100 pb-8 md:flex-row md:items-end md:justify-between gap-4">
                 <div>
-                    <h1 className="text-4xl font-black text-[#00492c] tracking-tighter">
-                        {agentName} Properties
-                    </h1>
+
+                    {
+                        window.location.pathname === "/agent/properties" ? (
+                            <h1 className="text-4xl font-black text-[#00492c] tracking-tighter capitalize">
+                                {agentName} Properties
+                            </h1>
+                        ) : window.location.pathname === "/merchant/properties" && (
+                            <h1 className="text-4xl font-black text-[#00492c] tracking-tighter capitalize">
+                                {displayName || "All Agents"} Properties
+                            </h1>
+                        )
+                    }
                     <p className="text-slate-500 font-bold uppercase text-[10px] tracking-wider mt-2">
                         Managing {properties.length} Active Properties
                     </p>
