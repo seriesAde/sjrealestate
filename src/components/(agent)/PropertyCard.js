@@ -36,22 +36,22 @@ export default function PropertyCard({ item, onDelete }) {
                 <MapPin className="w-3 h-3" /> {item.city}, {item.state}
             </p>
 
-            <div className="text-2xl font-black text-[#00492c] mb-6">
+            <div className="text-2xl font-black text-primary mb-6">
                 ₦{Number(item.price).toLocaleString()}
             </div>
 
             {/* Features */}
             <div className="flex justify-between py-4 border-t border-slate-50 mt-auto">
                 <div className="flex items-center gap-1.5">
-                    <Bed className="w-4 h-4 text-[#00492c]" />
+                    <Bed className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold text-slate-700">{item.bedroom || 0}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                    <Bath className="w-4 h-4 text-[#00492c]" />
+                    <Bath className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold text-slate-700">{item.bathroom || 0}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                    <Car className="w-4 h-4 text-[#00492c]" />
+                    <Car className="w-4 h-4 text-primary" />
                     <span className="text-xs font-bold text-slate-700">{item.parking_space || 0}</span>
                 </div>
             </div>
