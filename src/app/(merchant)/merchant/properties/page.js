@@ -49,10 +49,11 @@ export default function MyProperties() {
                     }
                 });
 
+
                 // Standardizing the data format
                 const fetchedData = Array.isArray(response.data)
                     ? response.data : (response.data.properties || response.data.data || []);
-                // console.log("fetched Property(s):", fetchedData)
+                console.log("fetched Property(s):", fetchedData)
 
                 setProperties(fetchedData);
 

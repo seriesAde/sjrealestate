@@ -23,13 +23,15 @@ export default function Loginform() {
 
         try {
             const res = await axios.post(`${baseURL}/auth/login`, data);
+
+            if (res.data.code !== 200) {
+                toast.error(`${res.data.msg}`)
+                return
+            }
             const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name, id: res.data.data.id, email: res.data.data.email || null, company: res.data.data.company || null };
-            console.log(dataToStore);
-            console.log(res.data);
-
-
             // Route to dashboard on successful login
             toast.success(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? `${dataToStore.name}` : dataToStore.role == "MERCHANT" ? `${dataToStore.name}` : null}`);
+
 
             setTimeout(() => {
                 // localStorage.setItem("authData", JSON.stringify(dataToStore));

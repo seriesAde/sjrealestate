@@ -62,19 +62,20 @@ export default function PropertyPage({ properties, setProperties, displayName })
                         Managing {properties.length} Active Properties
                     </p>
                 </div>
-                <Link href="/agent/properties/addProperties">
+                <Link href={`${window.location.pathname}/addProperties`}>
                     <button className="flex items-center gap-2 bg-[#00492c] text-white py-3 px-3 rounded-lg text-[10px] font-semibold uppercase tracking-widest hover:bg-[#003620] hover:shadow-md transition-all active:scale-95 cursor-pointer shadow-sm">
                         <Plus className="w-3.5 h-3.5" />
                         <span>Add Properties</span>
                     </button>
                 </Link>
+
             </div>
 
             {properties.length === 0 ? (
                 <div className="text-center py-32 border-2 border-dashed border-slate-100 rounded-2xl">
                     <Home className="w-12 h-12 text-slate-200 mx-auto mb-4" />
                     <p className="text-slate-400 font-bold uppercase text-xs tracking-widest">No properties created yet</p>
-                    <Link href="/agent/properties/addProperties" className="text-[#00492c] text-xs font-black underline mt-4 inline-block uppercase">
+                    <Link href={`${window.location.pathname}/addProperties`} className="text-[#00492c] text-xs font-black underline mt-4 inline-block uppercase">
                         Create your first listing
                     </Link>
                 </div>

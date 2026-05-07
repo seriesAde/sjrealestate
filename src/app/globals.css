@@ -2,27 +2,14 @@
 
 :root {
   /* Light mode defaults */
-  --background: #ffffff;
+  --background: #F1EDE7;
   --foreground: #171717;
   --brand-green: #00985B;
   --brand-dark: #00492C;
 }
 
 /* ==================== DARK MODE ==================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
 
-    /* You can change these for dark mode */
-    --brand-green: #00985B;
-    --brand-dark: #00492C;
-
-    /* Add any other custom variables you want */
-    --card: #171717;
-    --border: #333333;
-  }
-}
 
 /* ==================== THEME MAPPING ==================== */
 @theme {

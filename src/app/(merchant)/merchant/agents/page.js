@@ -1,27 +1,95 @@
+"use client"
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import axios from "axios";
+import ActionButtons from "@/components/(ui)/button";
+import toast from "react-hot-toast";
 
 export default function Agents() {
+    const baseURL = "/api";
+    const { authData } = useAuth();
+    const [fetchedAgents, setAgents] = useState([]);
+    const [status, setStatus] = useState([])
+
+    // console.log("Auth Data in Agents Page:", authData);
+    async function fecthAgents() {
+        if (!authData?.id) {
+            console.warn("Fetch skipped: authData.id is not ready yet.");
+
+            return;
+        }
+        let response = await axios.get(`${baseURL}/merchants/agents`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${authData.token}`
+            }
+        })
+        let data = response.data.data;
+        // console.log(data)
+        setAgents(data)
+        setStatus(data.is_verified)
+
+    }
+    useEffect(() => {
+        fecthAgents()
+    }, [authData?.id])
+
+    async function handleVerify(id) {
+        try {
+            const agent = fetchedAgents.find((a) => a.id === id);
+            const agentName = agent ? agent.full_name : "Unknown Agent";
+            const response = await axios.post(`/api/merchants/verify-agent`,
+                { agent_id: id, is_verified: true },
+                { headers: { Authorization: `Bearer ${authData.token}` } }
+            );
+
+
+            if (response.data.code === 200 || response.data.code === 201) {
+
+
+                toast.success(
+                    `${response.data.msg}: ${agentName}`
+                )
+
+                // 1. RE-FETCH DATA TO UPDATE UI
+                await fecthAgents();
+            }
+        } catch (error) {
+            console.error("Failed to verify agent:", error.response?.data || error.message);
+            alert("Verification failed. Please try again.");
+        }
+    }
+    async function handleEdit(id) {
+        try {
+            const agent = fetchedAgents.find((a) => a.id === id);
+            const agentName = agent ? agent.full_name : "Unknown Agent";
+            const response = await axios.post(`/api/merchants/verify-agent`,
+                { agent_id: id, is_verified: true },
+                { headers: { Authorization: `Bearer ${authData.token}` } }
+            );
+
+
+            if (response.data.code === 200 || response.data.code === 201) {
+
+
+                toast.success(
+                    `${response.data.msg}: ${agentName}`
+                )
+
+                // 1. RE-FETCH DATA TO UPDATE UI
+                await fecthAgents();
+            }
+        } catch (error) {
+            console.error("Failed to verify agent:", error.response?.data || error.message);
+            alert("Verification failed. Please try again.");
+        }
+    }
     return (
         <div className=" w-full">
 
-            <div className="flex justify-between w-full gap-20  p-5">
-                <div className=" bg-white p-5 rounded-lg shadow-md w-full text-primary min-h-25 flex items-center justify-center">
-                    <h2 className="text-2xl font-bold ">
-                        120 Properties
-                    </h2>
-                </div>
-                <div className=" bg-white p-5 rounded-lg shadow-md w-full  text-primary min-h-25 flex items-center justify-center">
-                    <h2 className="text-2xl font-bold ">
-                        Appointments: 20
-                    </h2>
-                </div>
-                <div className=" bg-white p-5 rounded-lg shadow-md w-full text-primary min-h-25 flex items-center justify-center">
-                    <h2 className="text-2xl font-bold ">
-                        Total Agents: 5
-                    </h2>
-                </div>
-            </div>
-            <div className="px-5">
+
+            <div className="px-5 mt-10">
                 <div className="flex items-center justify-between w-full ">
                     <h1 className="text-2xl font-bold text-primary mb-4">
                         AGENTS
@@ -39,40 +107,30 @@ export default function Agents() {
                             <th className="w-1/4">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr className="  ">
-                            <td className="py-3">123 Main St</td>
-                            <td className="py-3">John Doe</td>
-                            <td className="py-3">Verified</td>
-                            <td className="py-3 flex gap-5 w-full items-center text-justify">
-                                <button className="cursor-pointer text-primary hover:text-secondary bg-primary/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Edit
-                                </button>
-                                <button className="cursor-pointer text-blue-500 hover:text-blue-700 bg-blue-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Verify
-                                </button>
-                                <button className="cursor-pointer text-red-500 hover:text-red-700 bg-red-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="py-3">456 Oak Ave</td>
-                            <td className="py-3">Jane Smith</td>
-                            <td className="py-3">Pending</td>
-                            <td className="py-3 flex gap-5 w-full items-center text-justify">
-                                <button className="cursor-pointer text-primary hover:text-secondary bg-primary/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Edit
-                                </button>
-                                <button className="cursor-pointer text-blue-500 hover:text-blue-700 bg-blue-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Verify
-                                </button>
-                                <button className="cursor-pointer text-red-500 hover:text-red-700 bg-red-500/20 font-bold px-3 py-1 rounded-md transition-all duration-300">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    {
+                        fetchedAgents && fetchedAgents.length > 0 ? (fetchedAgents.map((agent) => (
+                            <tbody key={agent.id} >
+                                <tr className="  " key={agent.id}>
+                                    <td className="py-3">{agent.full_name}</td>
+                                    <td className="py-3">{agent.company}</td>
+                                    <td className="py-3">{agent.is_verified ? "Verified" : "Not Verified"}</td>
+                                    <td className="">
+                                        <ActionButtons
+                                            // onEdit={() => handleVerify(agent.id)}
+                                            // onDelete={() => console.log("Delete clicked for agent:", agent.id)}
+                                            onVerify={() => handleVerify(agent.id)}
+                                            status={agent.is_verified ? 'verified' : 'pending'}
+
+                                        />
+
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        ))) : null
+
+                    }
                 </table>
             </div>
         </div>
