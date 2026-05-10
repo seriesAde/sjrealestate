@@ -39,7 +39,7 @@ export default function PropertyPage({ properties, setProperties }) {
     };
 
     // Get agent name for the header safely
-    const agentName = JSON.parse(localStorage.getItem("agent_info"))?.user?.full_name || "Agent";
+    const agentName = JSON.parse(localStorage.getItem("agent_info"))?.company || "Agent";
 
     return (
         <div className="max-w-7xl mx-auto p-6 md:p-10 min-h-screen bg-white">

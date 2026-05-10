@@ -39,8 +39,10 @@ export default function Loginform() {
                 } else if (dataToStore.role === "MERCHANT") {
                     localStorage.setItem("authData", JSON.stringify(dataToStore));
                     router.push('/merchant/dashboard');
-                } else {
-                    router.push('/user/login');
+
+                } else if (dataToStore.role === "USER"){
+                     localStorage.setItem("user_info", JSON.stringify(dataToStore));
+                    router.push('/user/appointment');
                 }
 
             }, 1000)

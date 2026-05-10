@@ -15,21 +15,22 @@ export default function MyProperties() {
     useEffect(() => {
         const fetchProperties = async () => {
             const agentData = JSON.parse(localStorage.getItem("agent_info"));
+            // console.log(agentData)
             //Double Check  id and _id 
-            const agentId = agentData?.user?.id || agentData?.user?._id;
+            const agentId = agentData?.id || agentData?._id;
 
             if (!agentData?.token || !agentId) {
                 setLoading(false);
                 return;
             }
-            
+
             //Api fetch
             try {
                 const response = await axios.get(`${baseURL}/properties`, {
                     params: {
                         agent: agentId,
                         verified: false,
-                        merchant: agentId,
+                        // merchant: agentId,
                     },
                     headers: {
                         Authorization: `Bearer ${agentData.token}`
@@ -62,7 +63,7 @@ export default function MyProperties() {
 
     return (
         <>
-            <PropertyPage properties={properties} setProperties={setProperties}  />
+            <PropertyPage properties={properties} setProperties={setProperties} />
         </>
     )
 }
