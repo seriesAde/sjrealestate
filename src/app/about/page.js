@@ -1,5 +1,6 @@
 import Nav from "@/components/(ui)/nav"
 import BackToTop from "@/components/(ui)/backToTop"
+import Footer from "@/components/(ui)/footer"
 export default function About() {
     return (
         <div>
@@ -82,52 +83,49 @@ export default function About() {
                         </div>
                     </div>
                 </div>
+
+                {/* board of directors */}
                 <div className="">
                     <h1 className="capitalize mt-5 mb-20 font-bold text-3xl md:text-4xl text-secondary text-center">meet our team</h1>
                     <h2 className="text-secondary text-2xl md:text-3xl font-bold text-center my-5">Board of Directors</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-5 gap-10 md:gap-5 ">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-5 gap-10 lg:gap-5 lg:w-[80%] mx-auto">
                         <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/majesty.69ebab2b965fc26ea56e.jpeg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">majesty iwodi</h4></div>
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://t3.ftcdn.net/jpg/06/32/04/82/360_F_632048223_OmuLTk9nsw1xj4Ib4oZ5L6cseT0HndJE.jpg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">charles garbage</h4></div>
                         </div>
                         <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/dims.b803bd21602b9b8166de.jpeg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">oladimeji ogun</h4></div>
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://img.freepik.com/premium-photo/front-view-smart-young-real-estate-agent-with-backg_1124848-130547.jpg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">charles darwin</h4></div>
                         </div>
                         <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/muyi.02fe7fe0bc58c502d2f5.jpg" alt="" className=" w-[100%] m-2.5 lg:m-0" /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">muyideen oyeleke</h4></div>
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://img.magnific.com/free-photo/beautiful-female-real-estate-agent-standing-house-entrance-smiling-woman-with-short-graying-hair-pink-suit-getting-ready-meet-customers-real-estate-business-work-concept_74855-22183.jpg?semt=ais_hybrid&w=740&q=80" alt="" className=" w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">marie curie</h4></div>
                         </div>
-                        <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/evelyn.bbdc372c14afc1f8d727.jpeg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">evelyn akenbor</h4></div>
-                        </div>
+
                     </div>
                 </div>
                 <div>
 
                     <h2 className="text-secondary text-2xl md:text-3xl font-bold text-center my-5 capitalize">executive members</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-5 gap-10 lg:gap-5 lg:w-[80%] mx-auto">
-                        <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5  h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/majesty.69ebab2b965fc26ea56e.jpeg" alt="" className=" w-[100%] lg:w-auto m-2.5 lg:m-0 " /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">majesty iwodi</h4>
-                                <p className="uppercase  text-xs text-nowrap ">md/coe</p></div>
+                        <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://t3.ftcdn.net/jpg/06/32/04/82/360_F_632048223_OmuLTk9nsw1xj4Ib4oZ5L6cseT0HndJE.jpg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">charles garbage</h4></div>
                         </div>
                         <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
-                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://www.royalminesproperty.com/static/media/dims.b803bd21602b9b8166de.jpeg" alt="" className=" w-[100%] lg:w-auto m-2.5 lg:m-0" /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">oladimeji ogun</h4>
-                                <p className="capitalize  text-xs text-nowrap ">director finance & admin</p></div>
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://img.freepik.com/premium-photo/front-view-smart-young-real-estate-agent-with-backg_1124848-130547.jpg" alt="" className="w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">charles darwin</h4></div>
                         </div>
-                        <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 col-span-2  lg:col-span-1 h-100">
-                            <div className=" flex justify-center lg:h-[80%] lg:w-auto">  <img src="https://www.royalminesproperty.com/static/media/muyi.02fe7fe0bc58c502d2f5.jpg" alt="" className=" w-[100%] lg:w-auto m-2.5 lg:m-0 " /></div>
-                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">muyideen oyeleke</h4>
-                                <p className="capitalize  text-xs ">director business development</p></div>
+                        <div className="shadow-sm rounded-sm flex lg:flex-col items-center gap-5 h-100">
+                            <div className=" flex justify-center lg:h-[80%]">  <img src="https://img.magnific.com/free-photo/beautiful-female-real-estate-agent-standing-house-entrance-smiling-woman-with-short-graying-hair-pink-suit-getting-ready-meet-customers-real-estate-business-work-concept_74855-22183.jpg?semt=ais_hybrid&w=740&q=80" alt="" className=" w-[100%] m-2.5 lg:m-0" /></div>
+                            <div className="text-center"> <h4 className="uppercase font-bold text-lg md:text-xl text-secondary">marie curie</h4></div>
                         </div>
 
                     </div>
                 </div>
             </div>
             <BackToTop />
+            <Footer />
         </div>
     )
 }

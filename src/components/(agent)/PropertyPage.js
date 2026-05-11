@@ -14,6 +14,8 @@ export default function PropertyPage({ properties, setProperties, displayName })
             toast.error("Property ID is missing");
             return;
         }
+        console.log(propertyId)
+        // return;
 
         if (!window.confirm("Are you sure? This will delete the property permanently from the system.")) return;
 
