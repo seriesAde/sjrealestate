@@ -35,7 +35,7 @@ export default function UsersReg() {
             }
         } else {
             toast.error("No agent detected. Please log in.");
-            router.push("/agent-login");
+            router.push("/login");
         }
     }, [router]);
 
@@ -74,7 +74,7 @@ export default function UsersReg() {
                 toast.success(`User successfully created under ${agentName} Agent!`);
 
                 // Clear form or redirect to the agent's list of users
-                router.push("/agent/clients");
+                router.push("/user/profile");
             }
         } catch (error) {
             console.error("Registration Error:", error.response?.data);
@@ -127,7 +127,7 @@ export default function UsersReg() {
 
                     <div className="text-center mt-4">
                         <p className="text-sm text-gray-600">Already have an account?{" "}
-                            <Link href="/agent-login" className="text-[#00492c] font-semibold hover:underline">Login here</Link>
+                            <Link href="/login" className="text-[#00492c] font-semibold hover:underline">Login here</Link>
                         </p>
                     </div>
                 </form>

@@ -1,23 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { ListIcon } from "lucide-react";
+import { ListIcon, LogIn, User } from "lucide-react";
+import { hover } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { div } from "framer-motion/client";
 
 export default function Nav() {
     const pathname = usePathname();
     const [scroll, setScroll] = useState(false);
     const [hidden, setHidden] = useState(true);
+    const hideTimeout = useRef(null);
 
     const linkArr = [
         { name: "HOME", path: "/" },
         { name: "ABOUT", path: "/about" },
         { name: "PROPERTIES", path: "/properties" },
         { name: "CONTACTS", path: "/contacts" },
-        { name: "FAQ", path: "/faq" },
+        {
+            name: "PROFILE", path: "/user/profile", icon: <User fill="[#00492C]" className="hover:text-[#00985B]  text-[#00492C]" />
+        },
     ];
+    const storedData = localStorage.getItem("userInfo");
 
     useEffect(() => {
         function handleScroll() {
@@ -32,9 +39,14 @@ export default function Nav() {
         setHidden(!hidden);
     }
 
+
+
+
+
+
     return (
         <nav
-            className={`mx-auto px-5 shadow-sm sticky top-0 left-0 z-50 w-full bg-background  transition-all duration-500 ease-in-out ${scroll ? "lg:scale-100" : "lg:scale-95 lg:mt-5"
+            className={`mx-auto px-5 shadow-sm sticky top-0 left-0 z-50 w-full bg-[#F1EDE7]  transition-all duration-500 ease-in-out ${scroll && "lg:scale-100 lg:mt-5"
                 }`}
         >
             <div className="lg:flex justify-between items-center min-h-[72px]">
@@ -77,19 +89,27 @@ export default function Nav() {
                             <li key={item.name} className="py-3 lg:py-0 ">
                                 <Link
                                     href={item.path}
-                                    onClick={() => setHidden(true)} // Close menu on click
+                                    onClick={() => {
+                                        setHidden(true);
+                                    }} // Close menu on click
                                     className={`relative md:py-5 transition-colors duration-300 hover:text-black 
                                     ${isActive ? "text-black underline underline-offset-4 pb-2"
                                             : "text-primary"
                                         }`}
                                 >
-                                    {item.name}
+                                    {item?.icon ? <div >
+                                        {storedData ? item.icon : <Link href={"/login"} > LOGIN</Link>
+                                        }
+
+
+                                    </div> : item.name}
                                 </Link>
                             </li>
                         );
                     })}
                 </ul>
             </div>
+
         </nav>
     );
 }

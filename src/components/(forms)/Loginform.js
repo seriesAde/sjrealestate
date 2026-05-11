@@ -28,11 +28,11 @@ export default function Loginform() {
                 toast.error(`${res.data.msg}`)
                 return
             }
-            const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.full_name, id: res.data.data.id, email: res.data.data.email || null, company: res.data.data.company || null };
+            const dataToStore = { token: res.data.data.token, role: res.data.data.role, name: res.data.data.first_name ? res.data.data.first_name + " " + res.data.data.last_name : res.data.data.full_name, id: res.data.data.id, email: res.data.data.email || null, company: res.data.data.company || null };
             // Route to dashboard on successful login
-            toast.success(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? `${dataToStore.name}` : dataToStore.role == "MERCHANT" ? `${dataToStore.name}` : null}`);
+            toast.success(`Login successful! Welcome back ${dataToStore.role == "AGENT" ? `${dataToStore.name}` : dataToStore.role == "MERCHANT" ? `${dataToStore.name}` : "User"}`);
 
-
+            console.log(res)
             setTimeout(() => {
                 // localStorage.setItem("authData", JSON.stringify(dataToStore));
                 if (dataToStore.role === "AGENT") {
@@ -42,7 +42,12 @@ export default function Loginform() {
                     localStorage.setItem("authData", JSON.stringify(dataToStore));
                     router.push('/merchant/dashboard');
                 } else {
-                    router.push('/user/login');
+                    localStorage.setItem("userInfo", JSON.stringify(dataToStore));
+                    if (window.history.length > 1) {
+                        router.back();
+                    } else {
+                        router.push('/'); // Fallback to home if no history exists
+                    }
                 }
 
             }, 1000)

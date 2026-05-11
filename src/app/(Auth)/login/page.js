@@ -20,6 +20,9 @@ export default function Login() {
                         <LoginForm />
                     </div>
 
+                    <p> dont have an account? <Link className="text-sm text-primary/70" href={"/user/user-reg"}>
+                        sign Up
+                    </Link></p>
                 </div>
             </div>
         </div>

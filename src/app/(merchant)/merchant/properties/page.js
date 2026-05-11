@@ -40,15 +40,14 @@ export default function MyProperties() {
             try {
                 const response = await axios.get(`${baseURL}/properties`, {
                     params: {
-                        agent: selectedAgentId ? selectedAgentId : selectedAgentId[0],
+                        agent: selectedAgentId ? selectedAgentId : [],
                         verified: false,
-                        merchant: agentId,
+                        merchant: merchantData.id,
                     },
                     headers: {
                         Authorization: `Bearer ${agentData.token}`
                     }
                 });
-
 
                 // Standardizing the data format
                 const fetchedData = Array.isArray(response.data)
@@ -67,6 +66,7 @@ export default function MyProperties() {
 
         fetchProperties();
     }, [selectedAgentId]);
+
     const handleChange = (e) => {
         const value = e.target.value; // Capture the new value immediately
 
@@ -99,7 +99,7 @@ export default function MyProperties() {
                     onChange={handleChange}
                     className="w-2/3  border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm truncate"
                 >
-                    <option value="">Select Agent</option>
+                    <option value="">All Agent Porperties</option>
                     {agents.map((agent) => (
                         <option key={agent.id} value={agent.id}>
                             {agent.full_name}

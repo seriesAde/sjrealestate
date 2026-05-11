@@ -16,6 +16,7 @@ export default function CreateProperties() {
     const router = useRouter();
 
     const agentData = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("agent_info")) : null;
+    const merchantData = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("authData")) : null;
     const baseURL = "/api";
 
     const abujaDistricts = ["Lugbe", "Kubwa", "Karu", "Wuse", "Jabi", "Maitama", "Gwarinpa"];
@@ -123,8 +124,9 @@ export default function CreateProperties() {
             return toast.error(`Required: ${missing.join(", ")}`);
         }
 
-        const token = agentData?.token;
-        const agentId = agentData?.user?.id || agentData?.user?._id;
+        const token = merchantData?.token;
+        const agentId = agentData?.user?.id || agentData?.id;
+
 
         setLoading(true);
 
@@ -141,12 +143,14 @@ export default function CreateProperties() {
         };
 
         try {
+            // console.log(payload)
             // 1. Create Property
             const response = await axios.post(`${baseURL}/properties`, payload, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            console.log(response)
 
-            const newPropertyId = response.data.data.id;
+            const newPropertyId = response.data?.data?.id;
 
             // 2. TRIGGER IMAGE UPLOAD
             if (selectedFiles.length > 0) {
@@ -155,7 +159,7 @@ export default function CreateProperties() {
 
             localStorage.setItem("property_details", newPropertyId);
             toast.success("Property published successfully!");
-            router.push("/agent/properties");
+            router.push("/merchant/properties");
         } catch (error) {
             toast.error(error.response?.data?.msg || "Failed to create property");
             console.error("API Error:", error);
@@ -238,6 +242,7 @@ export default function CreateProperties() {
                         <div className="space-y-1">
                             <label className="text-[12px] font-bold text-slate-700">Property Use</label>
                             <select name="property_use" value={formData.property_use} onChange={handleChange} className="w-full border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm">
+                                <option value='select_property' key='property'> </option>
                                 {propertyUses.map(u => <option key={u} value={u}>{u}</option>)}
                             </select>
                         </div>

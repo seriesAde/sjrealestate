@@ -10,7 +10,7 @@ export default function Dashboard() {
     const { authData } = useAuth();
     const [loading, setLoading] = useState(true);
 
-    let baseUrl = " /api";
+    let baseUrl = "/api";
     const [dashboardData, setDashboardData] = useState({
         wishlist: null,
         properties: null,
@@ -26,20 +26,24 @@ export default function Dashboard() {
 
             return;
         }
+
         let wishRes = await Axios.get(`${baseUrl}/merchants/${authData.id}/wishlist`, {
             headers: {
                 'Authorization': `Bearer ${authData.token}`
             }
         })
+        // console.log(wishRes)
         let agentId = localStorage.getItem("agent_info") ? JSON.parse(localStorage.getItem("agent_info")).id : null;
+        // console.log(agentId)
         let agentRes = await Axios.get(`${baseUrl}/merchants/agents`, {
             headers: {
                 'Authorization': `Bearer ${authData.token}`
             }
         })
+
         let propertyRes = await Axios.get(`${baseUrl}/properties`, {
             params: {
-
+                agent: agentId,
                 verified: false,
                 merchant: authData.id,
             },
@@ -52,7 +56,7 @@ export default function Dashboard() {
         let totalProperties = propertyRes.data.total;
         let properties = propertyRes.data.data;
         let propStatus = propertyRes.data.data.is_verified;
-        console.log(properties);
+
         setLoading(false);
         setDashboardData(prevData => ({
             ...prevData,
@@ -98,23 +102,23 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="px-5 ">
-                {
-                    dashboardData.properties && dashboardData.properties.length > 0 ? (dashboardData.properties.map((property) => (
-                        <table className="w-full text-sm text-left text-secondary ">
-                            <thead className="text-lg text-secondary capitalize" >
-                                <h1 className="text-2xl font-bold text-primary mb-4">
-                                    Properties
-                                </h1>
-                                <tr className="">
-                                    <th className="w-1/4 px-2">Name</th>
-                                    <th className="w-1/4 px-2">Category</th>
-                                    <th className="w-1/4 px-2">Location</th>
-                                    <th className="w-1/4 px-2">Type</th>
-                                    <th className="w-1/4 px-2">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr key={property.id}>
+                <table className="w-full text-sm text-left text-secondary " >
+                    <thead className="text-lg text-secondary capitalize" >
+                        <h1 className="text-2xl font-bold text-primary mb-4">
+                            Properties
+                        </h1>
+                        <tr className="">
+                            <th className="w-1/4 px-2">Name</th>
+                            <th className="w-1/4 px-2">Category</th>
+                            <th className="w-1/4 px-2">Location</th>
+                            <th className="w-1/4 px-2">Type</th>
+                            <th className="w-1/4 px-2">Status</th>
+                        </tr>
+                    </thead>
+                    {
+                        dashboardData.properties && dashboardData.properties.length > 0 ? (dashboardData.properties.map((property) => (
+                            <tbody key={property.id}>
+                                <tr >
                                     <td className="py-3 px-2" >{property.name}</td>
                                     <td className="py-3 px-2" >{property.category}</td>
                                     <td className="py-3 px-2" >{property.address}</td>
@@ -123,18 +127,19 @@ export default function Dashboard() {
                                 </tr>
 
                             </tbody>
-                        </table>
-                    )))
-
-
-                        : (
-
-                            <div className="h-screen flex items-center justify-center bg-white">
-                                <Loader2 className="animate-spin w-12 h-12 text-[#00492c]" />
-                            </div>
-
                         )
-                }
+                        ))
+
+
+                            : (
+
+                                <div className="h-screen flex items-center justify-center bg-white">
+                                    <Loader2 className="animate-spin w-12 h-12 text-[#00492c]" />
+                                </div>
+
+                            )
+                    }
+                </table>
             </div>
 
         </div>

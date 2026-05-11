@@ -268,8 +268,8 @@ USER
 
     GET /users?limit=5&page=2 [TOKEN REQUIRED]
     DESCP To get user under an agent or a merchant
-
-    GET /users/:user_id/wishlist [TOKEN REQUIRED]
+wishlist
+    GET /users/:user_id/ [TOKEN REQUIRED]
     DESCP Getting all the wishlist for a user
 
     GET /users/:user_id/properties [TOKEN REQUIRED]

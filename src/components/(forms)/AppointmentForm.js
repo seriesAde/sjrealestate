@@ -7,13 +7,14 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { Calendar, Clock, MessageSquare, ShieldCheck } from "lucide-react";
 
-export default function AppointmentForm({ propertyId }) {
+export default function AppointmentForm({ propertyId, onSuccess }) {
     const [userId, setUserId] = useState("");
     const baseURL = "http://property.reworkstaging.name.ng/v1";
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("last_created_user"));
+        const user = JSON.parse(localStorage.getItem("userInfo"));
         if (user) setUserId(user.id || user._id);
+        // console.log(propertyId)
     }, []);
 
     const {
@@ -24,23 +25,59 @@ export default function AppointmentForm({ propertyId }) {
         resolver: zodResolver(appointmentSchema),
         defaultValues: {
             property_id: propertyId,
-            user_id: "",
+
         },
     });
 
+
+    // const onSubmit = async (data) => {
+    //     const payload = { ...data, user_id: userId, property_id: propertyId };
+    //     const agentData = JSON.parse(localStorage.getItem("userInfo"));
+    //     const token = agentData?.token;
+
+    //     try {
+    //         const res = await axios.post(`${baseURL}/appointments`, payload, {
+    //             headers: { Authorization: `Bearer ${token}` },
+    //         });
+    //         console.log(res)
+    //         if (res.status === 200 || res.status === 201) {
+    //             toast.success("Inspection booked successfully!");
+    //         }
+    //     } catch (error) {
+    //         toast.error(error.response?.data?.msg || "Booking failed");
+    //     }
+    // };
+
     const onSubmit = async (data) => {
-        const payload = { ...data, user_id: userId };
-        const agentData = JSON.parse(localStorage.getItem("agent_info"));
-        const token = agentData?.token;
+        // ✅ get token from userInfo, not agent_info
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo?.token;
+
+        if (!token) {
+            toast.error("Please login to book an appointment");
+            return;
+        }
+
+        const payload = {
+            ...data,
+            user_id: userId,
+            property_id: propertyId
+        };
+
+        // console.log("Submitting payload:", payload);
+        // console.log("Token:", token);               
 
         try {
             const res = await axios.post(`${baseURL}/appointments`, payload, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            console.log(res);
             if (res.status === 200 || res.status === 201) {
                 toast.success("Inspection booked successfully!");
+                onSuccess?.();
             }
         } catch (error) {
+            console.log("Error response:", error.response?.data); // 👈 see exact server error
             toast.error(error.response?.data?.msg || "Booking failed");
         }
     };
@@ -54,6 +91,7 @@ export default function AppointmentForm({ propertyId }) {
                     <ShieldCheck className="w-14 h-14 mx-auto mb-3 opacity-90" />
                     <h3 className="text-2xl font-bold italic tracking-wide">SJ Real Estate</h3>
                     <p className="text-[10px]text-gray-200 opacity-80 mt-1">Request a property inspection</p>
+
                 </div>
 
                 <div className="p-8 sm:p-10 space-y-8">
@@ -64,6 +102,7 @@ export default function AppointmentForm({ propertyId }) {
                         <input type="date" {...register("date")} className="w-full text-black px-4 py-4 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00492c] focus:border-transparent outline-none transition-all" />
                         {errors.date && <p className="text-red-500 text-xs font-medium mt-1">{errors.date.message}</p>}
                     </div>
+
 
                     <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-3">
@@ -133,6 +172,12 @@ export default function AppointmentForm({ propertyId }) {
                     </div>
                 </div>
             </form>
+            {/* <button
+                type="button"
+                onClick={() => handleSubmit(onSubmit, (errors) => console.log("ZOD ERRORS:", errors))()}
+            >
+                Test Submit
+            </button> */}
         </div>
     );
 }
