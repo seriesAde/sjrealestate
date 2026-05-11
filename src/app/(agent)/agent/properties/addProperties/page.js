@@ -19,7 +19,7 @@ export default function CreateProperties() {
     const baseURL = "/api";
 
     const abujaDistricts = ["Lugbe", "Kubwa", "Karu", "Wuse", "Jabi", "Maitama", "Gwarinpa"];
-    const availableAmenities = ["GYM", "SECURITY", "24/7 WATER", "STEADY ELECTRICITY"];
+    const availableAmenities = ["GYM", "SECURITY", "WATER", "ELECTRICITY","CAR WASH", "CLEANERS"];
 
     const paymentPlans = ["PER_ANNUM", "MONTHLY", "PER_PLOT", "PER_DAY"];
     const propertyTypes = ["RENT", "LEASE", "SALES"];
@@ -108,7 +108,7 @@ export default function CreateProperties() {
                 }
             });
         } catch (error) {
-            console.error("Gallery Error:", error);
+            console.error("Image Error:", error);
             toast.error("Property saved, but images failed to upload.");
         }
     };
@@ -147,7 +147,7 @@ export default function CreateProperties() {
             });
 
             const newPropertyId = response.data.data.id;
-
+console.log(response.data.data)
             // 2. TRIGGER IMAGE UPLOAD
             if (selectedFiles.length > 0) {
                 await uploadImages(newPropertyId);
@@ -208,77 +208,81 @@ export default function CreateProperties() {
                     </div>
 
                     {/* Classification */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="md:col-span-2 border-b border-slate-100 pb-2 flex items-center gap-2">
-                            <Tag className="w-5 h-5 text-[#00492c]" />
-                            <h3 className=" text-slate-800 uppercase text-sm tracking-widest">Classification</h3>
-                        </div>
+                      <div className="space-y-6">
+                    <div className="border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <Tag className="w-4 h-4 text-[#00492c]" />
+                        <h3 className="text-slate-800 uppercase text-[11px] font-black tracking-[0.2em]">Classification</h3>
+                    </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div className="space-y-1">
-                            <label className="text-sm font-bold text-slate-700">Category</label>
-                            <select name="category" value={formData.category} onChange={handleChange} className="w-full border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase">Category</label>
+                            <select name="category" value={formData.category} onChange={handleChange} className="w-full border border-slate-200 p-3  text-black rounded-sm bg-slate-50 text-sm font-bold">
                                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
                             </select>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-sm font-bold text-slate-700">Listing Type</label>
-                            <select name="type" value={formData.type} onChange={handleChange} className="w-full border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase">Contract Type</label>
+                            <select name="type" value={formData.contract_type} onChange={handleChange} className="w-full border text-black border-slate-200 p-3 rounded-sm bg-slate-50 text-sm font-bold">
                                 {propertyTypes.map(t => <option key={t} value={t}>{t}</option>)}
                             </select>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-sm font-bold text-slate-700">Payment Plan</label>
-                            <select name="payment_plan" value={formData.payment_plan} onChange={handleChange} className="w-full border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase">Payment Plan</label>
+                            <select name="payment_plan" value={formData.payment_plan} onChange={handleChange} className="w-full border border-slate-200 text-black p-3 rounded-sm bg-slate-50 text-sm font-bold">
                                 {paymentPlans.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
                             </select>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-[12px] font-bold text-slate-700">Property Use</label>
-                            <select name="property_use" value={formData.property_use} onChange={handleChange} className="w-full border border-slate-300 p-3 rounded-md outline-none focus:border-[#00492c] bg-white text-slate-900 text-sm">
+                            <label className="text-[10px] font-bold text-slate-400 uppercase">Property Use</label>
+                            <select name="property_use" value={formData.property_use} onChange={handleChange} className="w-full border border-slate-200 text-black p-3 rounded-sm bg-slate-50 text-sm font-bold">
                                 {propertyUses.map(u => <option key={u} value={u}>{u}</option>)}
                             </select>
                         </div>
                     </div>
+                </div>
 
                     {/* Specs */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {[
-                            { label: "Bedrooms", name: "bedroom", icon: Bed },
-                            { label: "Bathroom", name: "bathroom", icon: Bath },
-                            { label: "Toilets", name: "toilet", icon: User },
-                            { label: "Parking", name: "parking_space", icon: Car },
-                        ].map((spec) => (
-                            <div key={spec.name} className="space-y-1">
-                                <label className="text-[10px] font-black text-slate-500 uppercase flex items-center gap-1 justify-center">
-                                    <spec.icon className="w-3 h-3" /> {spec.label}
-                                </label>
-                                <input name={spec.name} type="number" value={formData[spec.name]} onChange={handleChange} className="w-full border border-slate-300 p-2 rounded-md bg-white text-slate-900 font-bold text-center outline-none focus:border-[#00492c]" />
-                            </div>
-                        ))}
-                    </div>
+                    {[
+                        { label: "Bedrooms", name: "bedroom", icon: Bed },
+                        { label: "Bathrooms", name: "bathroom", icon: Bath },
+                        { label: "Toilets", name: "toilet", icon: User },
+                        { label: "Parking", name: "parking_space", icon: Car },
+                    ].map((spec) => (
+                        <div key={spec.name} className="p-4 border border-slate-100 rounded-sm bg-slate-50/50">
+                            <label className="text-[9px] font-black text-slate-400 uppercase flex items-center gap-2 mb-2">
+                                <spec.icon className="w-3 h-3 text-[#00492c]" /> {spec.label}
+                            </label>
+                            <input name={spec.name} type="number" value={formData[spec.name]} onChange={handleChange} className="w-full bg-transparent text-slate-900 font-black text-xl outline-none" />
+                        </div>
+                    ))}
+                </div>
 
                     {/* Amenities */}
-                    <div className="space-y-3">
-                        <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-[#00985B]" /> Amenities
-                        </label>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {availableAmenities.map(amenity => (
-                                <button key={amenity} type="button"
-                                    onClick={() => handleAmenityChange(amenity)} className={`p-3 text-[10px] font-black rounded-md border-2 transition-all flex items-center justify-between tracking-widest ${formData.amenities.includes(amenity)
-                                        ? 'bg-green-50 border-[#00492c] text-[#00492c]'
-                                        : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
-                                        }`}
-                                >
-                                    {amenity}
-                                    {formData.amenities.includes(amenity) && <ShieldCheck className="w-3 h-3" />}
-                                </button>
-                            ))}
-                        </div>
+                     <div className="space-y-4">
+                    <label className="text-[11px] font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#00492c]" /> Featured Amenities
+                    </label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {availableAmenities.map(amenity => (
+                            <button key={amenity} type="button"
+                                onClick={() => handleAmenityChange(amenity)} 
+                                className={`p-4 text-[10px] font-black rounded-sm border transition-all flex items-center justify-between tracking-tighter ${
+                                    formData.amenities.includes(amenity)
+                                    ? 'bg-[#00492c] border-[#00492c] text-white'
+                                    : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
+                                }`}
+                            >
+                                {amenity}
+                                {formData.amenities.includes(amenity) && <ShieldCheck className="w-3 h-3" />}
+                            </button>
+                        ))}
                     </div>
+                </div>
 
                     {/* Gallery Section */}
                     <div className="space-y-4">

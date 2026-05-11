@@ -24,6 +24,7 @@ export default function SingleProduct({ params }) {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [favorite, setFavorite] = useState(false)
+    const [userId, setUserId] = useState()
     const buttonText = {
         SALES: "BUY NOW",
         LEASE: "LEASE NOW",
@@ -37,6 +38,7 @@ export default function SingleProduct({ params }) {
         if (!userInfo) {
             return
         } else {
+            setUserId(userInfo.id)
             try {
                 let res = await axios.get(
                     `${baseURL}/users/${userInfo.id}/wishlist`,
@@ -247,6 +249,7 @@ export default function SingleProduct({ params }) {
                     >
                         <AppointmentForm
                             propertyId={product.id}
+                            user={userId}
                             onSuccess={() => setIsModalOpen(false)}
                         />
                     </Modal>

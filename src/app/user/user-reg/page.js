@@ -1,13 +1,6 @@
 "use client";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { userRegSchema } from "@/lib/UserRegSchema";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
+import UserRegForm from "@/components/(forms)/UserRegForm"
 export default function UsersReg() {
     const baseURL = "/api";
     const [token, setToken] = useState(null);

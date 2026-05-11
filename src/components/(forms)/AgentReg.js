@@ -6,7 +6,7 @@ import { agentRegSchema } from "@/lib/agentRegSchema";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+
 
 export default function AgentReg() {
     const baseURL = "/api";
@@ -27,7 +27,7 @@ export default function AgentReg() {
 
     const {
         register,
-        handleSubmit,
+        handleSubmit, reset,
         formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(agentRegSchema),
@@ -51,15 +51,8 @@ export default function AgentReg() {
             if (response.status === 200 || response.status === 201) {
                 const regData = response.data?.data || response.data;
                 localStorage.setItem("reg_info", JSON.stringify(regData));
-                // toast.success("Agent Registered Successfully!");
                 toast.success(response.data.msg);
-                console.log(response)
-
-                // setTimeout(() => {
-                //     router.push("/login");
-
-
-                // }, 1500);
+                reset()
             }
 
         } catch (error) {

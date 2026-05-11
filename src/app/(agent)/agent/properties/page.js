@@ -15,8 +15,9 @@ export default function MyProperties() {
     useEffect(() => {
         const fetchProperties = async () => {
             const agentData = JSON.parse(localStorage.getItem("agent_info"));
+            // console.log(agentData)
             //Double Check  id and _id 
-            const agentId = agentData?.id || agentData?.user?._id;
+            const agentId = agentData?.id || agentData?._id;
 
             if (!agentData?.token || !agentId) {
                 setLoading(false);
@@ -29,7 +30,7 @@ export default function MyProperties() {
                     params: {
                         agent: agentId,
                         verified: false,
-                        merchant: agentId,
+                        // merchant: agentId,
                     },
                     headers: {
                         Authorization: `Bearer ${agentData.token}`
@@ -39,7 +40,7 @@ export default function MyProperties() {
                 // Standardizing the data format
                 const fetchedData = Array.isArray(response.data)
                     ? response.data : (response.data.properties || response.data.data || []);
-                // console.log("fetched Property(s):", fetchedData)
+                console.log("fetched Property(s):", fetchedData)
 
                 setProperties(fetchedData);
 
@@ -63,7 +64,6 @@ export default function MyProperties() {
     return (
         <>
             <PropertyPage properties={properties} setProperties={setProperties} />
-
         </>
     )
 }
